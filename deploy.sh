@@ -7,7 +7,7 @@ set -e
 npm run build
 
 # 进入生成的文件夹
-# cd docs/.vuepress/dist
+cd dist
 
 #创建.nojekyll 防止Github Pages build错误
 touch .nojekyll
@@ -15,8 +15,11 @@ touch .nojekyll
 git init
 git add -A
 git commit -m 'deploy'
+git branch -M master
+# git remote add origin https://github.com/jinxi1334640772/vue-admin-system.git
+# git push -f "https://${access_token}@github.com/jinxi1334640772/vue-admin-system.git" master:deploy
+git push -f "https://github.com/jinxi1334640772/vue-admin-system.git" master:deploy
 
-#git push -f "https://${access_token}@github.com/PanJiaChen/vue-element-admin-site.git" master:gh-pages
-git push -f "https://${access_token}@github.com/jinxi1334640772/vue-admin-system.git" master:gh-pages
+cd -
 
-# cd -
+echo https://jinxi1334640772.github.io/vue-admin-system/

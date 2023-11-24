@@ -1,5 +1,6 @@
 'use strict'
 const path = require('path')
+// const packageName = require('./package.json').name
 const defaultSettings = require('./src/settings.js')
 
 function resolve(dir) {
@@ -11,8 +12,8 @@ const port = process.env.port || process.env.npm_config_port || 9527 // dev port
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
-  publicPath: '/',
-  outputDir: 'dos',
+  publicPath: '',
+  outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
