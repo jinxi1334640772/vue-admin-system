@@ -1,6 +1,7 @@
 name: Build and Deploy
 on:
   # Runs on pushes targeting the default branch
+  #  这是actions脚本，放在workflows文件夹下，每次push到GitHub都会自动执行
   push:
     branches: ["master"]
 
