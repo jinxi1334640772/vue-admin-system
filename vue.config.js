@@ -30,6 +30,14 @@ module.exports = {
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.
     name: name,
+    output: {
+      // 微应用的包名，这里与主应用中注册的微应用名称一致
+      library: "VueMicroApp",
+      // 将你的 library 暴露为所有的模块定义下都可运行的方式
+      libraryTarget: 'umd',
+      // 按需加载相关，设置为 webpackJsonp_VueMicroApp 即可
+      jsonpFunction: `webpackJsonp_VueMicroApp`,
+    },
     resolve: {
       alias: {
         '@': resolve('src')

@@ -1,18 +1,19 @@
 import Vue from 'vue'
 
 import Cookies from 'js-cookie'
-
+// 微前端改造，注入新的publicPath
+import './utils/public-path'
 import 'normalize.css/normalize.css' // a modern alternative to CSS resets
 
 import Element from 'element-ui'
 import './styles/element-variables.scss'
-import enLang from 'element-ui/lib/locale/lang/en'// 如果使用中文语言包请默认支持，无需额外引入，请删除该依赖
+import enLang from 'element-ui/lib/locale/lang/en' // 如果使用中文语言包请默认支持，无需额外引入，请删除该依赖
 
 import '@/styles/index.scss' // global css
 
 import App from './App'
 import store from './store'
-import router from './router'
+import router, { resetRouter } from './router'
 
 import './icons' // icon
 import './permission' // permission control
@@ -39,15 +40,37 @@ Vue.use(Element, {
 })
 
 // register global utility filters
-Object.keys(filters).forEach(key => {
+Object.keys(filters).forEach((key) => {
   Vue.filter(key, filters[key])
 })
 
 Vue.config.productionTip = false
 
-new Vue({
-  el: '#app',
-  router,
-  store,
-  render: h => h(App)
-})
+let instance = null
+function render() {
+  instance = new Vue({
+    el: '#app',
+    router,
+    store,
+    render: (h) => h(App)
+  })
+}
+if (!window.__POWERED_BY_QIANKUN__) {
+  render()
+}
+// 必须的三个微应用钩子函数
+export function bootstrap(props) {
+  console.log('vue微前端触发bootsstrap钩子', props)
+}
+export function mount(props) {
+  console.log('vue微前端触发mount钩子', props)
+  render(props)
+}
+export function unmount(props) {
+  console.log('vue微前端触发unmount钩子', props)
+  instance.$destroy()
+  instance = null
+  // 卸载路由和路由监听
+  resetRouter()
+  router = null
+}
