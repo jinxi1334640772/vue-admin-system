@@ -3,9 +3,7 @@ const path = require('path')
 // const packageName = require('./package.json').name
 const defaultSettings = require('./src/settings.js')
 
-function resolve(dir) {
-  return path.join(__dirname, dir)
-}
+const resolve = dir => path.join(__dirname, dir)
 
 const name = defaultSettings.title || 'vue-admin-system' // page title
 const port = process.env.port || process.env.npm_config_port || 9527 // dev port
@@ -38,11 +36,11 @@ module.exports = {
     name: name,
     output: {
       // 微应用的包名，这里与主应用中注册的微应用名称一致
-      library: "VueMicroApp",
+      library: 'VueMicroApp',
       // 将你的 library 暴露为所有的模块定义下都可运行的方式
       libraryTarget: 'umd',
       // 按需加载相关，设置为 webpackJsonp_VueMicroApp 即可
-      jsonpFunction: `webpackJsonp_VueMicroApp`,
+      jsonpFunction: `webpackJsonp_VueMicroApp`
     },
     resolve: {
       alias: {
@@ -67,21 +65,8 @@ module.exports = {
     config.plugins.delete('prefetch')
 
     // set svg-sprite-loader
-    config.module
-      .rule('svg')
-      .exclude.add(resolve('src/icons'))
-      .end()
-    config.module
-      .rule('icons')
-      .test(/\.svg$/)
-      .include.add(resolve('src/icons'))
-      .end()
-      .use('svg-sprite-loader')
-      .loader('svg-sprite-loader')
-      .options({
-        symbolId: 'icon-[name]'
-      })
-      .end()
+    config.module.rule('svg').exclude.add(resolve('src/icons')).end()
+    config.module.rule('icons').test(/\.svg$/).include.add(resolve('src/icons')).end().use('svg-sprite-loader').loader('svg-sprite-loader').options({ symbolId: 'icon-[name]' }).end()
 
     config
       .when(process.env.NODE_ENV !== 'development',
