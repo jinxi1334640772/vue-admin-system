@@ -6,11 +6,11 @@ const defaultSettings = require('./src/settings.js')
 const resolve = dir => path.join(__dirname, dir)
 
 const name = defaultSettings.title || 'vue-admin-system' // page title
-const port = process.env.port || process.env.npm_config_port || 9527 // dev port
+const port = process.env.port || process.env.npm_config_port || 8888 // dev port
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
-  publicPath: '/vue-admin-system/',
+  publicPath: '/vue-admin-system',
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
