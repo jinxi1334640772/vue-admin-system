@@ -390,18 +390,13 @@ export const asyncRoutes = [
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
-function getbase() {
-  let base = ''
-  if (window.__POWERED_BY_QIANKUN__) {
-    base = `${process.env.NODE_ENV === 'development' ? '/vue' : '/micro-frondend-container/vue'}`
-  }
-  return base
-}
+
 const createRouter = () =>
   new Router({
     // mode: 'history', // require service support
-    // 微前端时，会添加前缀作为publicPath，用作区分子应用
-    base: getbase(),
+    // 微前端时，会添加前缀作为publicPath=父应用publicPath+激活path，用作区分子应用
+    // 这里父应用的publicPath为‘’，激活path为/vue
+    base: `${window.__POWERED_BY_QIANKUN__ ? '/vue/vue-admin-system/' : '/vue-admin-system/'}`,
     scrollBehavior: () => ({ y: 0 }),
     routes: constantRoutes
   })
