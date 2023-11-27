@@ -59,14 +59,14 @@ if (!window.__POWERED_BY_QIANKUN__) {
   render()
 }
 // 必须的三个微应用钩子函数
-export function bootstrap(props) {
+export async function bootstrap(props) {
   console.log('vue微前端触发bootsstrap钩子', props)
 }
-export function mount(props) {
+export async function mount(props) {
   console.log('vue微前端触发mount钩子', props)
   render(props)
 }
-export function unmount(props) {
+export async function unmount(props) {
   console.log('vue微前端触发unmount钩子', props)
   instance.$destroy()
   instance = null
