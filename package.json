@@ -4,9 +4,9 @@
   "description": "vue 2.6 + element-ui + vue-router + vuex + echarts + axios + eslint + vue/cli + sass + test",
   "author": "zhangjinxi <jinxi1334640772@outlook.com>",
   "scripts": {
-    "dev": "vue-cli-service serve",
+    "dev": "vue-cli-service serve --mode development",
     "lint": "eslint --ext .js,.vue src",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --mode production",
     "build:stage": "vue-cli-service build --mode staging",
     "preview": "node build/index.js --preview",
     "new": "plop",
